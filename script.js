@@ -39,7 +39,7 @@ function renderCart() {
   cartList.innerHTML = ""; // Clear previous list
   cart.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.name} - $${item.price}`;
+    li.innerHTML = `${item.name} - ${item.price}`;
     cartList.appendChild(li);
   });
 }
