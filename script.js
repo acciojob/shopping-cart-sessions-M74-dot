@@ -16,7 +16,7 @@ function renderProducts() {
   products.forEach((product) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      ${product.name} - $${product.price}
+      ${product.name} - ${product.price}
       <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
     `;
     productList.appendChild(li);
