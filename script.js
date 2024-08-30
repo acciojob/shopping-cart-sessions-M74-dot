@@ -1,3 +1,4 @@
+// Product data
 const products = [
   { id: 1, name: "Product 1", price: 10 },
   { id: 2, name: "Product 2", price: 20 },
@@ -16,7 +17,7 @@ function renderProducts() {
   products.forEach((product) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      ${product.name} - ${product.price}
+      ${product.name} - $${product.price}
       <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
     `;
     productList.appendChild(li);
@@ -39,7 +40,7 @@ function renderCart() {
   cartList.innerHTML = ""; // Clear previous list
   cart.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.name} - ${item.price}`;
+    li.innerHTML = `${item.name} - $${item.price}`;
     cartList.appendChild(li);
   });
 }
@@ -47,8 +48,19 @@ function renderCart() {
 // Add item to cart
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
-  const cart = loadCart();
-  cart.push(product);
+  let cart = loadCart();
+
+  // Check if the item is already in the cart
+  const existingItem = cart.find((item) => item.id === productId);
+  
+  if (existingItem) {
+    // If the item exists, increase the quantity or just keep adding it multiple times (depending on business logic)
+    cart.push(product); // For now, we'll just push it again (allowing duplicates)
+  } else {
+    // If the item doesn't exist, add it to the cart
+    cart.push(product);
+  }
+  
   saveCart(cart);
   renderCart(); // Update cart display
 }
